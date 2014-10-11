@@ -1,0 +1,32 @@
+getPlayerWanteds() {
+    if(!checkHandles())
+        return -1
+ 
+    dwPtr := 0xB7CD9C
+    dwPtr := readDWORD(hGTA, dwPtr)
+    if(ErrorLevel) {
+        ErrorLevel := ERROR_READ_MEMORY
+        return -1
+    }
+ 
+    Wanteds := readDWORD(hGTA, dwPtr)
+    if(ErrorLevel) {
+        ErrorLevel := ERROR_READ_MEMORY
+        return -1
+    }
+ 
+    ErrorLevel := ERROR_OK
+    return Wanteds
+}
+
+getPlayerZone()
+{
+	aktPos := getCoordinates()
+	return calculateZone(aktPos[1], aktPos[2], aktPos[3])
+}
+
+getPlayerCity()
+{
+	aktPos := getCoordinates()
+	return calculateCity(aktPos[1], aktPos[2], aktPos[3])
+}
